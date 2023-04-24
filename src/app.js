@@ -142,8 +142,11 @@ app.get("/home", async (req,res) => {
         const userWallet=[];
         const userName=user.name;
         const wallet = await db.collection('wallet').find().toArray();
+        console.log('id', session.userId)
+        
         for(let i=0; i<wallet.length; i++){
-            if(wallet[i].userId===session.userId){
+            console.log('wallet[i]', wallet[i].userId)
+            if(session.userId.equals(wallet[i].userId)){ //para comparar objetos
                 userWallet.push(wallet[i]);
             }
           }
